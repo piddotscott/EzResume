@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>sign up</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add custom styles here */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            border: 1px solid #ccc;
+        }
+
+        .btn-primary {
+            background-color: #ff5722;
+            border-color: #ff5722;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff7f50;
+            border-color: #ff7f50;
+        }
+
+        /* Add styles for statements */
+        .statement {
+            color: #ff0000; /* Red color for statements */
+            display: none; /* Initially hide statements */
+        }
+
+        /* Add styles for ticks */
+        .tick {
+            color: #008000 !important; /* Green color for ticks */
+            display: none; /* Initially hide ticks */
+        }
+
+        /* Add styles for wrong symbol */
+        .wrong {
+            color: #ff0000; /* Red color for wrong symbol */
+            display: none; /* Initially hide wrong symbol */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 form-container">
+            <h2>Sign Up</h2>
+            <form method="post" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" class="form-control" required
+                           onfocus="showStatement('username-statement')" onblur="hideStatement('username-statement')"
+                           oninput="checkUsername()">
+                    <div id="username-statement" class="statement">Username must contain uppercase, lowercase,
+                        numbers, and may include underscores.
+                    </div>
+                    <span id="username-tick" class="tick">✔</span>
+                    <span id="username-wrong" class="wrong">✘</span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" required
+                           onfocus="showStatement('email-statement')" onblur="hideStatement('email-statement')"
+                           oninput="checkEmail()">
+                    <div id="email-statement" class="statement">Enter a valid email address.</div>
+                    <span id="email-tick" class="tick">✔</span>
+                    <span id="email-wrong" class="wrong">✘</span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" class="form-control" required
+                           onfocus="showStatement('password-statement')" onblur="hideStatement('password-statement')"
+                           oninput="checkPassword()">
+                    <div id="password-statement" class="statement">Password strength: Too Weak</div>
+                    <span id="password-tick" class="tick">✔</span>
+                    <span id="password-wrong" class="wrong">✘</span>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" name="confirm-password" class="form-control" required
+                           onfocus="showStatement('confirm-password-statement')" onblur="hideStatement('confirm-password-statement')"
+                           oninput="checkPasswordMatch()">
+                    <div id="confirm-password-statement" class="statement"></div>
+                    <span id="confirm-password-tick" class="tick">✔</span>
+                    <span id="confirm-password-wrong" class="wrong">✘</span>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" onclick="redirectToCreate()">Sign Up</button>
+                    <!-- Link to the sign-up page -->
+                </div>
+                
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+      function redirectToCreate() {
+        window.location.href = "create.html";
+    }
+    // Function to show a statement by its ID
+    function showStatement(statementId) {
+        document.getElementById(statementId).style.display = 'block';
+    }
+
+    // Function to hide a statement by its ID
+    function hideStatement(statementId) {
+        document.getElementById(statementId).style.display = 'none';
+    }
+
+    // Function to check if the username follows the requirements
+    function checkUsername() {
+        const username = document.getElementById('username').value;
+        const usernameTick = document.getElementById('username-tick');
+        const usernameWrong = document.getElementById('username-wrong');
+        // Add your username validation logic here
+        if (/^[a-zA-Z0-9_]+$/.test(username) && /[a-z]/.test(username) && /[A-Z]/.test(username) && /\d/.test(username)) {
+            usernameTick.style.display = 'inline'; // Show the tick
+            usernameWrong.style.display = 'none'; // Hide the wrong symbol
+        } else {
+            usernameTick.style.display = 'none'; // Hide the tick
+            usernameWrong.style.display = 'inline'; // Show the wrong symbol
+        }
+    }
+
+    // Function to check if the email follows the requirements
+    function checkEmail() {
+        const email = document.getElementById('email').value;
+        const emailStatement = document.getElementById('email-statement');
+        const emailTick = document.getElementById('email-tick');
+        const emailWrong = document.getElementById('email-wrong');
+        // Add your email validation logic here (basic format validation)
+        if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
+            emailTick.style.display = 'inline'; // Show the tick
+            emailWrong.style.display = 'none'; // Hide the wrong symbol
+        } else {
+            emailTick.style.display = 'none'; // Hide the tick
+            emailWrong.style.display = 'inline'; // Show the wrong symbol
+        }
+    }
+
+    // Function to check password strength
+    function checkPassword() {
+        const password = document.getElementById('password').value;
+        const passwordStatement = document.getElementById('password-statement');
+        const passwordTick = document.getElementById('password-tick');
+        const passwordWrong = document.getElementById('password-wrong');
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+
+        // Add your password strength validation logic here
+        if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password) && password !== username && password !== email) {
+            passwordStatement.textContent = 'Password strength: Strong';
+            passwordStatement.style.color = '#008000'; // Green color for strong password
+            passwordTick.style.display = 'inline'; // Show the tick
+            passwordWrong.style.display = 'none'; // Hide the wrong symbol
+        } else if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/.test(password)) {
+            passwordStatement.textContent = 'Password strength: Moderate';
+            passwordStatement.style.color = '#ffa500'; // Orange color for moderate password
+            passwordTick.style.display = 'inline'; // Show the tick
+            passwordWrong.style.display = 'none'; // Hide the wrong symbol
+        } else {
+            passwordStatement.textContent = 'Password strength: Too Weak';
+            passwordStatement.style.color = '#ff0000'; // Red color for weak password
+            passwordTick.style.display = 'none'; // Hide the tick
+            passwordWrong.style.display = 'inline'; // Show the wrong symbol
+        }
+    }
+
+    // Function to check if the passwords match
+    function checkPasswordMatch() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        const confirmPasswordStatement = document.getElementById('confirm-password-statement');
+        const confirmPasswordTick = document.getElementById('confirm-password-tick');
+        const confirmPasswordWrong = document.getElementById('confirm-password-wrong');
+        // Add your password match validation logic here
+        if (password === confirmPassword) {
+            confirmPasswordStatement.textContent = 'Passwords match';
+            confirmPasswordStatement.style.color = '#008000'; // Green color for match
+            confirmPasswordTick.style.display = 'inline'; // Show the tick
+            confirmPasswordWrong.style.display = 'none'; // Hide the wrong symbol
+        } else {
+            confirmPasswordStatement.textContent = 'Passwords do not match';
+            confirmPasswordStatement.style.color = '#ff0000'; // Red color for no match
+            confirmPasswordTick.style.display = 'none'; // Hide the tick
+            confirmPasswordWrong.style.display = 'inline'; // Show the wrong symbol
+        }
+    }
+
+    // Function to validate the entire form
+    function validateForm() {
+        // Add your form validation logic here
+        return true; // Return true if the form is valid, false otherwise
+    }
+</script>
+</body>
+</html>

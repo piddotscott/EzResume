@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Create Your Resume</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Define your custom font stack */
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Center the container and add some margin */
+        .container {
+            margin: 30px auto;
+            max-width: 800px; /* Set a maximum width for better readability */
+            padding: 20px;
+            background-color: #fff; /* Add a white background to the container */
+            border-radius: 8px; /* Round the corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        }
+
+        /* Style headings */
+        h1 {
+            color: #007bff;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 20px; /* Add some spacing below h2 elements */
+        }
+
+        /* Style form groups for consistency */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        /* Style buttons consistently */
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        /* Add padding to the form for better spacing */
+        #resumeForm {
+            padding: 20px;
+        }
+
+
+        /* Style the skills and languages sections */
+        .skills-fields,
+        .selected-language-entry {
+            margin-top: 10px; /* Add some spacing between sections */
+        }
+
+
+        .rate {
+            font-size: 24px; /* Increase the size of the rating stars */
+        }
+
+        .rate input {
+            display: none; /* Hide the radio buttons */
+        }
+
+        .rate label {
+            color: #ccc; /* Add color to the star icons */
+            cursor: pointer;
+        }
+
+        .rate label:before {
+            content: '\2605'; /* Unicode star character */
+            padding: 5px;
+        }
+
+        /* Style the education and achievement sections */
+        .education-section,
+        .achievement-section {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px; /* Add spacing between sections */
+        }
+
+        /* Style the "Add More" buttons */
+        #addEducation,
+        #addAchievement {
+            background-color: #28a745; /* Green color for adding */
+            border-color: #28a745;
+            color: #fff;
+            margin-top: 10px; /* Add spacing above the buttons */
+        }
+
+        #addEducation:hover,
+        #addAchievement:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        /* Add spacing between the create resume button and the form */
+        button[type="submit"] {
+            margin-top: 20px;
+        }
+
+        /* Add some margin to small text elements for better readability */
+        .small.text-muted {
+            margin-top: 5px;
+        }
+		
+		/* Style the file input */
+.form-control-file {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+
+/* Style the file input label */
+.form-control-file-label {
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+/* Style the file input label on hover */
+.form-control-file-label:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+	
+</head>
+
+<body>
+    <div class="container">
+        <h1>Create Your Resume</h1>
+		
+<!-- Personal Information -->
+<div class="form-group" style="border: 1px solid #ccc; padding: 10px;">
+    <h2>Personal Information</h2>
+    <label for="fullName">Full Name:</label>
+    <input type="text" class="form-control" id="fullName" name="fullName" required>
+    <div style="margin-top: 25px;"></div>
+
+    <!-- Add a photo upload input -->
+    <div class="form-group">
+        <label for="photo">Upload Your Photo (JPEG or PNG):</label>
+        <input type="file" class="form-control-file" id="photo" name="photo" accept=".jpg, .jpeg, .png">
+        <small class="text-muted">Please upload a photo in JPEG or PNG format (max file size: 2MB).</small>
+    </div>
+
+    <!-- Add an <img> element to display the uploaded image -->
+    <div class="form-group" id="photo-preview" style="display: none;">
+        <label>Uploaded Photo:</label>
+        <img id="uploaded-image" src="" alt="Uploaded Photo" style="width: 180px; height: auto;">
+    </div>
+
+    <label for="address">Address:</label>
+    <input type="text" class="form-control" id="address" name="address" required>
+    <div style="margin-top: 25px;"></div>
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" class="form-control" id="phone" name="phone" required pattern="[0-9]{10}">
+    <small class="text-muted">Please enter a valid 10-digit phone number.</small>
+
+    <div style="margin-top: 10px;"></div> <!-- Add some spacing between fields -->
+
+    <label for="email">Email Address:</label>
+    <input type="email" class="form-control" id="email" name="email" required>
+    <div style="margin-top: 25px;"></div>
+
+    <!-- Add a field for the user's introduction -->
+    <label for="introduction">Introduction:</label>
+    <textarea class="form-control" id="introduction" name="introduction"></textarea>
+</div>
+
+    
+    
+
+           <!-- Work Experience Section -->
+<div class="form-group" style="border: 1px solid #ccc; padding: 10px;">
+    <h3>Work Experience</h3>
+    <div id="experienceContainer">
+        <!-- Initial experience entry -->
+        <div class="experience-entry">
+            <div class="form-group">
+                <div style="margin-top: 25px;"></div>
+                <label for="jobTitle">Job Title:</label>
+                <input type="text" class="title" name="title[]" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="company">Company/Organization</label>
+                <input type="text" id="company" name="company[]" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="experience_year_start">Year start:</label>
+                <input type="date" id="experience_year_start" name="experience_year_start[]" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="experience_year_end">Year end:</label>
+                <input type="date" id="experience_year_end" name="experience_year_end[]" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="job">Description:</label>
+                <input type="text" id="job" name="job[]" class="form-control" required>
+            </div>
+            <div style="margin-top: 30px;"></div>
+            <button type="button" class="btn btn-primary ok-experience">OK</button>
+            <button type="button" class="btn btn-danger remove-experience">Remove</button>
+            <button type="button" class="btn btn-secondary clear-experience">Clear</button>
+            <button type="button" class="btn btn-primary add-experience">Add Experience</button>
+        </div>
+    </div>
+</div>
+
+  <div style="margin-top: 45px;"></div>        
+  
+<!-- Skills Section -->
+<div style="padding: 10px;">
+    <h3>Skills</h3>
+    <div class="form-group">
+        <div class="skills-fields" style="border: 1px solid #ccc; padding: 10px;">
+            <!-- Skills entries will be added here -->
+        </div>
+        <button type="button" class="btn btn-primary add-skill">Add Skill</button>
+        <!-- Add some spacing between the buttons -->
+        <div style="margin-top: 10px;"></div>
+        <select id="skillDropdown" class="form-control">
+            <option value="">Select Skill</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="HTML/CSS">HTML/CSS</option>
+            <option value="Writing">Writing</option>
+            <option value="Microsoft Excel">Microsoft Excel</option>
+            <option value="Microsoft Powerpoint">Microsoft Powerpoint</option>
+            <option value="Microsoft Word">Microsoft Word</option>
+            <option value="Figma">Figma</option>
+            <option value="Sketch">Sketch</option>
+            <option value="Adobe Photoshop">Adobe Photoshop</option>
+            <option value="Python">Python</option>
+            <option value="C++">C++</option>
+			<option value="SQL">SQL</option>
+			<option value="STATA">STATA</option>
+			<option value="Teamwork">Teamwork</option>
+			<option value="Public speaking">Public speaking</option>
+			<option value="Leadership">Leadership</option>
+			<option value="Management">Management</option>
+			<option value="Critical thinking">Critical thinking</option>
+			<option value="Cloud computing">Cloud computing</option>
+			<option value="Data analysis">Data analysis</option>
+			<option value="Project management">Project management</option>
+			<option value="Active listening">Active listening</option>
+			<option value="Communication">Communication</option>
+			<option value="Computer">Computer</option>
+			<option value="Customer service">Customer service</option>
+			<option value="Problem-solving">Problem-solving</option>
+			<option value="Time management">Time management</option>
+			<option value="Adaptability">Adaptability</option>
+			<option value="WordPress">WordPress</option>
+			<option value="Creativity">Creativity</option>
+			<option value="Responsibility">Responsibility</option>
+			<option value="Design">Design</option>
+			<option value="Data Analysis">Data Analysis</option>
+			<option value="Mathematics">Mathematics</option>
+			<option value="Marketing">Marketing</option>
+			<option value="Administrative">Administrative</option>
+			<option value="Accounting & Finance">Accounting & Finance</option>
+        </select>
+		<div class="form-group">
+    <input type="text" id="customSkill" class="form-control" placeholder="Add Custom Skill">
+</div>
+    </div>
+</div>
+            <!-- ... (other skills fields) ... -->
+		
+			<div style="margin-top: 45px;"></div>
+<h3>Languages</h3>
+<div style="margin-top: 25px;"></div>
+<!-- Container to display selected languages -->
+<div id="selectedLanguagesContainer"></div>
+
+<!-- Add a button to trigger the language selection modal -->
+<button type="button" class="btn btn-primary add-language" data-toggle="modal" data-target="#languageSelectionModal">Add Language</button>
+
+<!-- Add some spacing between the buttons -->
+<div class="form-group" style="margin-top: 10px;">
+    <!-- Leave this empty, it's just for spacing -->
+</div>
+
+<!-- Create a modal dialog for language selection -->
+<div class="modal" id="languageSelectionModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Select a Language</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Language selection form -->
+                <form id="languageSelectionForm">
+                    <div class="form-group">
+                        <label for="selectedLanguage">Language:</label>
+                        <select class="form-control" id="selectedLanguage" required>
+                           <option value="">Select Language</option>
+                            <option value="English">English</option>  
+							 <option value="Malay">Malay</option>
+                             <option value="Spanish">Spanish</option>
+                             <option value="French">French</option>
+					         <option value="Mandarin">Mandarin</option>
+					         <option value="Hindi">Hindi</option>
+					         <option value="Portuguese">Portuguese</option>
+					         <option value="Bengali">Bengali</option>
+					         <option value="Russian">Russian</option>
+					         <option value="Japanese">Japanese</option>
+					         <option value="Vietnamese">Vietnamese</option>
+					         <option value="Turkish">Turkish</option>
+					         <option value="Korean">Korean</option>
+					         <option value="Tamil">Tamil</option>
+					         <option value="Egyptian Spoken Arabic">Egyptian Spoken Arabic</option>
+					         <option value="Standard German">Standard German</option>
+					         <option value="Urdu">Urdu</option>
+					         <option value="Italian">Italian</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmLanguageSelection">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: 45px;"></div>
+
+<!-- Education Section -->
+<div class="form-group" style="border: 1px solid #ccc; padding: 10px;">
+    <h3>Education</h3>
+    <div id="educationContainer">
+        <!-- Initial education entry -->
+        <div class="education-section">
+            <!-- Existing Education Form Fields Here -->
+            <div class="form-group">
+                <label for="school">School/Institute:</label>
+                <input type="text" id="school" name="school[]" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="degree">Degree/Course:</label>
+                <input type="text" id="degree" name="degree[]" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="year_start">Year Start:</label>
+                <input type="date" id="year_start" name="year_start[]" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="year_end">Year End:</label>
+                <input type="date" id="year_end" name="year_end[]" class="form-control">
+                <small class="text-muted">Leave empty if currently enrolled.</small>
+            </div>
+            <div class="form-group">
+                <label for="education_description">Description/Achievements:</label>
+                <textarea id="education_description" name="education_description[]" class="form-control"></textarea>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn btn-primary ok-education">OK</button>
+                <button type="button" class="btn btn-danger remove-education">Remove</button>
+                <button type="button" class="btn btn-secondary clear-education">Clear</button>
+                <button type="button" class="btn btn-primary add-education">Add More Education</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Add some spacing between the buttons -->
+<div class="form-group" style="margin-top: 10px;">
+    <!-- Leave this empty, it's just for spacing -->
+</div>
+
+<h3>References</h3>
+<div id="refContainer">
+    <!-- Initial ref entry -->
+    <div class="ref-section">
+        <div class="form-group">
+            <label for="ref_name">Name:</label>
+            <input type="text" id="ref_name" name="ref_name[]" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="ref_title">Title:</label>
+            <input type="text" id="ref_title" name="ref_title[]" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="ref_description">Description:</label>
+            <input type="text" id="ref_description" name="ref_description[]" class="form-control" required>
+        </div>
+        <div class="button-group">
+            <button type="button" class="btn btn-primary ok-ref">OK</button>
+            <button type="button" class="btn btn-danger remove-ref">Remove</button>
+            <button type="button" class="btn btn-secondary clear-ref">Clear</button>
+            <button type="button" class="btn btn-primary add-ref">Add Reference</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- JavaScript code goes here -->
+
+	<script>
+	
+    // Job title search
+   $(document).ready(function() {
+    // Event listener for the search button
+    $('#jobTitleSearchBtn').on('click', function() {
+        const searchTerm = $('#jobTitleSearch').val().toLowerCase();
+        const options = $('#jobTitle option');
+
+        // Clear previous selection
+        $('#jobTitle').val('');
+
+        // Iterate through the options and show/hide based on search
+        options.each(function(index, option) {
+            const jobTitle = $(option).text().toLowerCase();
+            const optionElement = $(option);
+
+            if (jobTitle.includes(searchTerm)) {
+                optionElement.show();
+            } else {
+                optionElement.hide();
+            }
+        });
+
+        // Show "No results found" if no matching options
+        if ($('#jobTitle option:visible').length === 0) {
+            $('#searchResults').html('<p>No results found</p>');
+        } else {
+            $('#searchResults').empty();
+        }
+    });
+
+    // Event listener for selecting a job title from the dropdown
+    $('#jobTitle').on('change', function() {
+        const selectedTitle = $(this).val();
+        $('#jobTitleSearch').val(selectedTitle);
+        $('#searchResults').empty();
+    });
+});
+
+</script>
+	
+
+<script>
+$(document).ready(function () {
+    // Add Experience
+    $('.add-experience').click(function () {
+        const experienceEntry = $('.experience-entry:first').clone();
+        experienceEntry.find('input').val('');
+        $('#experienceContainer').append(experienceEntry);
+    });
+
+    // Remove Experience
+    $(document).on('click', '.remove-experience', function () {
+        $(this).closest('.experience-entry').remove();
+    });
+
+    // OK Experience
+    $(document).on('click', '.ok-experience', function () {
+        const entry = $(this).closest('.experience-entry');
+        const inputs = entry.find('input');
+        let allFieldsCompleted = true;
+
+        inputs.each(function () {
+            if ($(this).val() === '') {
+                allFieldsCompleted = false;
+                return false; // Exit the loop if any field is empty
+            }
+        });
+
+        if (allFieldsCompleted) {
+            alert('Experience entry added!');
+        } else {
+            alert('Please complete all fields before adding another experience entry.');
+        }
+    });
+});
+
+
+// Event listener for clear button
+$('#experienceContainer').on('click', '.clear-experience', function () {
+    const experienceEntry = $(this).closest('.experience-entry');
+    experienceEntry.find('input').val('');
+});
+
+	</script>
+	
+
+<script>
+// Languages
+// Variable to count the number of languages added
+let languagesCount = 0;
+
+// Event listener for the "Add Language" button
+$('.add-language').on('click', function () {
+    if (languagesCount >= 5) {
+        alert("You can select up to five languages.");
+        return;
+    }
+    $('#languageSelectionModal').modal('show');
+});
+
+// Event listener for confirming the language selection
+$('#confirmLanguageSelection').on('click', function () {
+    const selectedLanguage = $('#selectedLanguage').val();
+
+    if (selectedLanguage) {
+        const languageEntry = $('<div>').addClass('selected-language-entry');
+        languageEntry.html(`
+            <span class="selected-language">${selectedLanguage}</span>
+            <input hidden=true id="language" class="form-control" value="${selectedLanguage}"></input>
+            <button type="button" class="btn btn-danger remove-language">Remove</button>
+        `);
+        $('#selectedLanguagesContainer').append(languageEntry);
+        $('#languageSelectionModal').modal('hide');
+        languagesCount++;
+    } else {
+        alert("Please select a language.");
+    }
+});
+
+// Clear selections and reset the form inside the modal after it's hidden
+$('#languageSelectionModal').on('hidden.bs.modal', function () {
+    $('#languageSelectionForm')[0].reset();
+});
+
+// Event listener for removing a language
+$('#selectedLanguagesContainer').on('click', '.remove-language', function () {
+    $(this).closest('.selected-language-entry').remove();
+    languagesCount--;
+});
+</script>
+
+
+  <script>
+$(document).ready(function() {
+    let educationCount = 1;
+
+    // Function to add a new education entry
+    function addEducationEntry() {
+        const educationContainer = $('#educationContainer');
+        const newEducationSection = $('.education-section:first').clone();
+        newEducationSection.find('input, textarea').val('');
+        educationContainer.append(newEducationSection);
+        educationCount++;
+    }
+
+    // Event listener to add a new education entry
+    $(document).on('click', '.add-education', function() {
+        addEducationEntry();
+    });
+
+    // Event listener for removing an education entry
+    $(document).on('click', '.remove-education', function() {
+        if (educationCount > 1) {
+            $(this).closest('.education-section').remove();
+            educationCount--;
+        }
+    });
+
+    // Event listener for clearing an education entry
+    $(document).on('click', '.clear-education', function() {
+        $(this).closest('.education-section').find('input, textarea').val('');
+    });
+
+    // Event listener for OK button
+    $(document).on('click', '.ok-education', function() {
+        alert('Education entry added!');
+    });
+});
+</script>
+
+<script>
+	
+$(document).ready(function() {
+    let projectsCount = 1; // Start with one project entry
+
+    // Function to add a new project entry
+    function addProjectEntry() {
+        const projectContainer = $('#projectContainer');
+        const newProjectSection = $('.project-section:first').clone();
+        newProjectSection.find('input').val(''); // Clear input fields
+        projectContainer.append(newProjectSection);
+        projectsCount++;
+
+        // Add a remove project button
+        const removeButton = $('<button type="button" class="btn btn-danger remove-project">-</button>');
+        newProjectSection.append(removeButton);
+
+        // Event listener for removing a project entry
+        removeButton.on('click', function() {
+            if (projectsCount > 1) {
+                newProjectSection.remove();
+                projectsCount--;
+            }
+        });
+    }
+
+    // Event listener for adding a new project entry
+    $('.add-project').on('click', addProjectEntry);
+});
+
+</script>
+<script>
+    $(document).ready(function() {
+        let refCount = 1;
+    
+        // Function to add a new ref entry
+        function addRefEntry() {
+            const refContainer = $('#refContainer');
+            const newRefSection = $('.ref-section:first').clone();
+            newRefSection.find('input').val('');
+            refContainer.append(newRefSection);
+            refCount++;
+        }
+    
+        // Event listener for the "Add More ref" button
+        $('.add-ref').on('click', addRefEntry);
+    
+        // Event listener for removing an ref entry
+        $(document).on('click', '.remove-ref', function() {
+            if (refCount > 1) {
+                $(this).closest('.ref-section').remove();
+                refCount--;
+            }
+        });
+    
+        // Event listener for clearing an ref entry
+        $(document).on('click', '.clear-ref', function() {
+            $(this).closest('.ref-section').find('input').val('');
+        });
+    
+        // Event listener for OK button in ref
+        $(document).on('click', '.ok-ref', function() {
+            alert('reference entry added!');
+        });
+    });
+    </script>
+
+<script>
+$(document).ready(function () {
+    $("#nextBtn").click(function () {
+        console.log("Button clicked"); // Add this line for debugging
+
+        let allFilled = true;
+        let formData = {};
+        var src = $("#uploaded-image").attr('src');
+        formData.photo = src;
+
+        console.log()
+       
+        // Check if all input fields with class 'form-control' are filled
+        $(".form-control").each(function () {
+            const fieldName = $(this).attr('id');
+            const value = $(this).val();
+
+            console.log(fieldName, value); // Add this line for debugging
+
+            if ($(this).val() === "") {
+                allFilled = false;
+                return false; // Exit the loop if any field is empty
+            } else {
+                if (formData[fieldName]) {
+                    if (!Array.isArray(formData[fieldName])) {
+                        // Convert the existing value into an array
+                        formData[fieldName] = [formData[fieldName]];
+                    }
+                    // Push the new value into the array
+                    formData[fieldName].push(value);
+                } else {
+                    formData[fieldName] = value;
+                }
+            }
+        });
+
+        if (!allFilled) {
+            alert("Please complete all fields first.");
+        } else {
+            console.log(formData);
+            const formDataWithUniqueKeys = {};
+
+            for (const key in formData) {
+                let uniqueKey = key;
+                if (Array.isArray(formData[key])) {
+                    for (let i = 0; i < formData[key].length; i++) {
+                        formDataWithUniqueKeys[`${key}.${i + 1}`] = formData[key][i];
+                    }
+                } else {
+                    formDataWithUniqueKeys[uniqueKey] = formData[key];
+                }
+            }
+
+            console.log(JSON.stringify(formDataWithUniqueKeys));
+
+            localStorage.setItem("formData", JSON.stringify(formDataWithUniqueKeys));
+
+            // Redirect to template_choices.html when all fields are filled
+            window.location.href = "template_choices.html";
+        }
+    });
+});
+</script>
+
+
+<script>
+    const photoInput = document.getElementById('photo');
+    const photoPreview = document.getElementById('photo-preview');
+    const uploadedImage = document.getElementById('uploaded-image');
+
+    photoInput.addEventListener('change', function () {
+        const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+        const maxFileSize = 2 * 1024 * 1024; // 2MB
+
+        if (this.files && this.files[0]) {
+            const file = this.files[0];
+
+            if (!allowedExtensions.test(file.name)) {
+                alert('Please upload an image in JPEG or PNG format.');
+                this.value = ''; // Clear the file input
+                uploadedImage.src = '';
+                photoPreview.style.display = 'none';
+                return;
+            }
+
+            if (file.size > maxFileSize) {
+                alert('The file size exceeds the maximum allowed size of 2MB.');
+                this.value = ''; // Clear the file input
+                uploadedImage.src = '';
+                photoPreview.style.display = 'none';
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                uploadedImage.src = e.target.result;
+                photoPreview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            uploadedImage.src = '';
+            photoPreview.style.display = 'none';
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+    let skillsCount = 0;
+
+    const skillsFields = document.querySelector('.skills-fields');
+    const addSkillButton = document.querySelector('.add-skill');
+    const skillDropdown = document.getElementById('skillDropdown');
+    const customSkillInput = document.getElementById('customSkill');
+
+    addSkillButton.addEventListener('click', function () {
+        if (skillsCount >= 10) {
+            alert("You can select up to ten skills.");
+            return;
+        }
+
+        const selectedSkill = skillDropdown.value.trim();
+        const customSkill = customSkillInput.value.trim();
+
+        if (selectedSkill && customSkill) {
+            alert("Please select a predefined skill or enter a custom skill, but not both.");
+        } else if (!selectedSkill && !customSkill) {
+            alert("Please select a predefined skill or enter a custom skill.");
+        } else {
+            skillsCount++;
+            const skillEntry = document.createElement('div');
+            skillEntry.classList.add('skill-entry');
+            skillEntry.innerHTML = `
+                <p class="selected-skill">${selectedSkill || customSkill}</p>
+                <input class="form-control" id="skill-entry" name="skills[]" hidden=true value="${selectedSkill || customSkill}">
+                <button type="button" class="btn btn-danger remove-skill">Remove Skill</button>
+            `;
+            skillsFields.appendChild(skillEntry);
+
+            // Clear input fields after adding a skill
+            skillDropdown.value = '';
+            customSkillInput.value = '';
+        }
+    });
+
+    skillsFields.addEventListener('click', function (event) {
+        const target = event.target;
+        if (target.classList.contains('remove-skill')) {
+            skillsCount--;
+            target.closest('.skill-entry').remove();
+        }
+    });
+});
+
+</script>
+
+<script>
+        // Clear local storage when create.html is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            localStorage.clear();
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const submitFormButton = document.getElementById('submitForm');
+            // Add an event listener to the form submission button
+            submitFormButton.addEventListener('click', function () {
+                // Collect form data and store it in localStorage
+                const formData = {
+                    name: document.getElementById('fullName').value,
+                    // Add other fields to the formData object
+                };
+                // Store the form data in localStorage
+                localStorage.setItem('resumeFormData', JSON.stringify(formData));
+
+                // Log the data that has been stored in the console for debugging
+                console.log('Data stored in localStorage: ', formData);
+            });
+        });
+</script>
+
+<div id="warningMessage" class="alert alert-danger" style="display: none;">
+    Please complete all fields before proceeding.
+</div>
+
+<!-- Next button at the most down in right side -->
+<button type="button" class="btn btn-primary" id="nextBtn" style="position: fixed; bottom: 20px; right: 20px;">Next</button>
+
+<!-- Add some spacing between the "Next" button and the form -->
+<div style="margin-bottom: 60px;"></div>
+
+</body>
+</html>

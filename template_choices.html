@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Template Choice</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding-top: 20px;
+        }
+
+        .template-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .template-card {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+            height: 560px;
+        }
+
+        .template-card:hover {
+            background-color: #f2f2f2;
+        }
+
+        .template-card img {
+            max-width: 100%;
+            max-height: 80%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .template-label {
+            margin-top: 10px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Select Your Resume Template</h1>
+
+    <div class="template-container">
+        <div class="template-card" data-template="template1">
+            <p class="template-label">Template 1</p>
+            <img src="template.jpg" alt="Template 1" id="template1Image">
+        </div>
+
+        <div class="template-card" data-template="template2">
+            <p class="template-label">Template 2</p>
+            <img src="template2.jpg" alt="Template 2" id="template2Image">
+        </div>
+
+        <div class="template-card" data-template="template3">
+            <p class="template-label">Template 3</p>
+            <img src="template3.jpg" alt="Template 3" id="template3Image">
+        </div>
+    </div>
+
+    <script>
+        function previewImage(imageId) {
+            const image = document.getElementById(imageId);
+            image.style.maxWidth = '100%';
+        }
+
+        document.querySelectorAll('.template-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const selectedTemplate = this.getAttribute('data-template');
+                const params = new URLSearchParams(window.location.search);
+                params.set("selectedTemplate", selectedTemplate);
+                localStorage.setItem('selectedTemplate', selectedTemplate);
+                window.location.href = `template_output.html?${params.toString()}`;
+            });
+        });
+    </script>
+</body>
+</html>

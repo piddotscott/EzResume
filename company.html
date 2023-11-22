@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Application Portal</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles for a professional website */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            /* Light gray background */
+            margin: 0;
+            padding: 0;
+        }
+
+        .jumbotron {
+            background-color: #007bff;
+            color: #fff;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        .btn-primary {
+            background-color: #ff5722;
+            border-color: #ff5722;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff7f50;
+            border-color: #ff7f50;
+        }
+
+        /* Additional custom styles for the Application page */
+        .Application-content {
+            margin-top: 20px;
+        }
+
+        /* Additional styles for document attachment section */
+        #documentSection {
+            margin-top: 20px;
+        }
+
+        #documentSection label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Additional styles for the email input section */
+        #emailInput {
+            margin-top: 20px;
+        }
+
+        #emailInput label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Additional styles for the instructions and checkbox */
+        #instructions {
+            margin-top: 20px;
+        }
+
+        #instructions label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Additional styles for the new instructions and checkbox */
+        #newInstructions {
+            margin-top: 20px;
+        }
+
+        #newInstructions label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Additional styles for company details */
+        #companyDetails {
+            margin-top: 20px;
+        }
+
+        #companyDetails h2 {
+            color: #007bff;
+        }
+
+        #companyDetails p {
+            margin-top: 10px;
+        }
+
+        /* Additional styles for the company details form */
+        #companyForm {
+            margin-top: 20px;
+        }
+
+        #companyForm label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Additional styles for the verify and submit sections */
+        #verifySubmit {
+            margin-top: 20px;
+        }
+
+        #verifySubmit label {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"> Application Portal</a>
+    </nav>
+
+    <!-- Application Page Content -->
+    <div class="container Application-content">
+        <div class="jumbotron">
+            <h1 class="display-4">Welcome to Application Portal</h1>
+            <p class="lead">Follow the instructions below:</p>
+        </div>
+
+        <!-- Edit Cover Letter Section -->
+        <div class="container" id="editCoverLetter">
+            <h2>Edit Cover Letter</h2>
+            <p>To edit your cover letter, click on the button below:</p>
+            <a class="btn btn-primary" href="cover_letter_editor.html">Edit Cover Letter</a>
+        </div>
+
+
+        <!-- Instructions Section -->
+        <div class="container" id="instructions">
+            <h2>Instructions</h2>
+            <p>Before submitting your application, please make sure to:</p>
+
+            <label for="acceptCheckbox">
+                <input type="checkbox" id="acceptCheckbox"> Tick the checkbox to confirm that the provided email is true.
+            </label>
+
+            <p>Attach the following documents:</p>
+            <ul>
+                <li>Your Resume</li>
+                <li>Letter from SPMP</li>
+                <li>Cover Letter</li>
+            </ul>
+
+            <p>Once everything is ready, click on the "Submit Documents" button below.</p>
+        </div>
+
+        <!-- Document Attachment Section -->
+        <div id="documentSection">
+            <label for="resume">Please Attach Resume:</label>
+            <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx">
+
+            <label for="spmpLetter">Please Attach Letter from SPMP:</label>
+            <input type="file" id="spmpLetter" name="spmpLetter" accept=".pdf, .doc, .docx">
+
+            <label for="coverLetter">Please Attach Cover Letter:</label>
+            <input type="file" id="coverLetter" name="coverLetter" accept=".pdf, .doc, .docx">
+        </div>
+
+        <!-- Company Details Section -->
+        <div id="companyDetails">
+            <h2>Company Details</h2>
+            <p>Please provide the details of the company:</p>
+
+            <form method="post" action="companydtb.php" id="companyForm">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+            
+                <label for="matric">Matric Num:</label>
+                <input type="text" id="matric" name="matric" required>
+            
+                <label for="email"> Your Email:</label>
+                <input type="email" id="email" name="email" required>
+            
+                <label for="companyName">Company Name:</label>
+                <input type="text" id="companyName" name="companyName" required>
+            
+                <label for="companyEmail">Email:</label>
+                <input type="email" id="companyEmail" name="companyEmail" required>
+            
+                <label for="companyAddress">Address:</label>
+                <textarea id="companyAddress" name="companyAddress" rows="3" required></textarea>
+            
+                <label for="verifyCheckbox">
+                    <input type="checkbox" id="verifyCheckbox" required> I have verified all the information provided.
+                </label>
+            
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            
+        </div>
+            
+        </div>
+    </div>
+
+    <script>
+        function showEmailInput() {
+            var emailInput = document.getElementById('emailInput');
+            emailInput.style.display = 'block';
+        }
+
+        function submitEmail() {
+            var email = document.getElementById('email').value;
+            // You can use the email value as needed, for example, send it to a server or perform some action
+            alert('Email submitted: ' + email);
+        }
+
+        function submitDocuments() {
+            var acceptCheckbox = document.getElementById('acceptCheckbox');
+            var resume = document.getElementById('resume');
+            var spmpLetter = document.getElementById('spmpLetter');
+            var coverLetter = document.getElementById('coverLetter');
+            var verifyCheckbox = document.getElementById('verifyCheckbox');
+
+            // Check if the user has accepted the email condition
+            if (!acceptCheckbox.checked) {
+                alert('Please accept the email condition.');
+                return;
+            }
+
+            // Check if all three documents are attached
+            if (!resume.files.length || !spmpLetter.files.length || !coverLetter.files.length) {
+                alert('Please attach all three documents.');
+                return;
+            }
+
+            // Check if the user has verified the information
+            if (!verifyCheckbox.checked) {
+                alert('Please verify all the information provided.');
+                return;
+            }
+
+            // Get company details from the form
+            var companyName = document.getElementById('companyName').value;
+            var companyEmail = document.getElementById('companyEmail').value;
+            var companyAddress = document.getElementById('companyAddress').value;
+
+            // Proceed with forwarding to email platform/app
+            alert('Documents submitted. Forwarding to email platform/app.\nCompany Details:\nName: ' + companyName + '\nEmail: ' + companyEmail + '\nAddress: ' + companyAddress);
+        }
+    </script>
+</body>
+
+</html>

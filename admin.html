@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-bnvbtN+vbzQlWsYWROpL/J4mOB57ZjMWdzMxz2+d5RmOZ4KVqaiUqj2d02ww5C" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        /* Custom styles for a professional website */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            /* Light gray background */
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #007bff; /* Blue header color */
+        }
+
+        .navbar-brand {
+            color: #fff; /* White text color for the brand */
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff; /* White text color for the links */
+        }
+
+        .jumbotron {
+            background-color: #007bff;
+            color: #fff;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+         /* Additional custom styles for the Admin Panel */
+        h2, h4 {
+            color: #007bff; /* Blue heading color */
+        }
+
+        /* Blue background for the title */
+        h2 {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px; /* Add space below the title */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 15px; /* Add more space between buttons */
+        }
+
+        /* Style hyperlinks as buttons */
+        ul li a {
+            display: inline-block;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #ff5722; /* Orange color */
+            border-radius: 5px;
+            width: 100%; /* Make buttons full width */
+        }
+
+        ul li a:hover {
+            background-color: #e64a19; /* Darker orange color on hover */
+            text-decoration: none;
+        }
+
+       /* Additional styles for button descriptions */
+        .button-description {
+            margin-bottom: 20px;
+        }
+
+        /* Additional custom styles for the Admin Panel */
+        h2, h4 {
+            color: #007bff; /* Blue heading color */
+        }
+
+        /* Blue background for the title */
+        h2 {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        /* Style hyperlinks as buttons */
+        ul li a {
+            display: inline-block;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #ff5722; /* Orange color */
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+        }
+
+        ul li a:hover {
+            background-color: #e64a19; /* Darker orange color on hover */
+            text-decoration: none;
+        }
+</style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"> Admin Panel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Admin Panel Content -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h2>Welcome, Admin!</h2>
+                <p>This is the admin panel. You have access to special features and settings here.</p>
+
+                <!-- Display the amount of users -->
+                <?php include 'admin_panel.php'; echo getUserCount(); ?>
+
+                <!-- Display the user list -->
+                <h4>User List:</h4>
+                <?php include 'admin_panel.php'; echo getUserList(); ?>
+
+                <!-- Options for updating, deleting, and inserting users -->
+                <h4>User Management:</h4>
+                <ul>
+                    <li>
+                        <a href="search.php">Find User</a>
+                        <p class="button-description">Search and view details of a specific user.</p>
+                    </li>
+                    <li>
+                        <a href="update_user.php">Update User</a>
+                        <p class="button-description">Update information of an existing user.</p>
+                    </li>
+                    <li>
+                        <a href="delete_user.php">Delete User</a>
+                        <p class="button-description">Delete a user from the system.</p>
+                    </li>
+                    <li>
+                        <a href="insert_user.php">Insert User</a>
+                        <p class="button-description">Add a new user to the system.</p>
+                    </li>
+                    <li>
+                        <a href="application_user.php">Search Application</a>
+                        <p class="button-description">Search and view details of a specific application.</p>
+                    </li>
+                    <li>
+                        <a href="all_application.php">All Applications</a>
+                        <p class="button-description">View a list of all applications submitted.</p>
+                    </li>
+                    <li>
+                        <a href="all_users.php">List of Users</a>
+                        <p class="button-description">View a list of all users in the system.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

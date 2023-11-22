@@ -1,0 +1,55 @@
+/* Apply styles to the entire page when printing */
+@media print {
+    body {
+        font-family: Arial, sans-serif;
+        background-color: white;
+        margin-left: 20px;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    h2, h3, h4, h5 {
+        margin: 10px 0;
+    }
+
+    .section {
+        margin: 20px 0;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        border: none;
+        background: none;
+    }
+
+    .section-header {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+    }
+
+    .section-content {
+        padding: 10px 0;
+    }
+
+    .btn-primary {
+        display: none;
+    }
+}
+    .cv{
+        margin-left: 50%;
+        margin-top: 50px;
+        margin-bottom: 100px;
+        background-color: deepskyblue;
+        border-radius: 10px;
+    }

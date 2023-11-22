@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;300;500;700&family=Roboto:wght@100;300;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto';
+        }
+    </style>
+    	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+<body style="display:flex; justify-content:center; align-items:center; background-color: #182339;">
+
+<div style="display:flex; width: 70%; border:1px solid black;">
+    <div style="color:#ffffff;width: 30%; border: 1px solid black; background-color: #323b4e;">
+        <div>
+            <div style="display: flex; justify-content: center; padding: 20px;">
+                <img style="width: 124px; height: 124px; border-radius: 60px;" id="uploaded-image" src=""></img>
+            </div>
+            <div style="padding: 40px; padding-top: 20px;">
+                <div style="font-size: 20px; font-weight: bold; border-bottom: 1px solid #ffffff; padding-bottom: 10px; width: 150%;">Contact</div>
+                <div style="margin-top: 20px; font-size: 15px; font-weight: bold">Phone</div>
+                <div id="phone_value" style="font-size: 12px; font-weight: 100;">011-1234567</div>
+                <div style="margin-top: 20px; font-size: 15px; font-weight: bold">Email</div>
+                <div id="email_value" style="font-size: 12px; font-weight: 100;"></div>
+                <div style="margin-top: 20px; font-size: 15px; font-weight: bold">Address</div>
+                <div id="address_value" style="font-size: 12px; font-weight: 100; word-wrap:break-word"></div>
+            </div>
+            <div  id="education" style="padding: 40px; padding-top:10px;">
+                <div style="font-size: 20px; border-bottom: 1px solid #ffffff; width: 150%; padding-bottom: 10px;">Education</div>
+            </div>
+            <div style="padding: 40px; padding-top: 10px;">
+                <div style="font-size: 20px; border-bottom: 1px solid #ffffff; width: 150%; padding-bottom: 10px; margin-bottom: 30px;">Expertise</div>
+                <ul id="skill" style="padding-left: 10px;">
+
+                </ul>
+            </div>
+            <div id="language" style="padding: 40px; padding-top: 10px;">
+                <div style="font-size: 20px; border-bottom: 1px solid #ffffff; margin-bottom: 30px; padding-bottom: 10px;">Language</div>
+            </div>
+        </div>
+    </div>
+    <div style="color:#323b4e; width: 70%; padding: 40px; background-color: #ffffff;">
+        <div id="full_name_value" style="font-size:50px"></div>
+        <div id="" style="font-size:19px">-</div>
+        <div id="" style="font-size:19px">-</div>
+        <div id="experience" style="margin-top: 40px">
+            <div style="font-size: 20px; border-bottom: 1px solid #323b4e; padding-bottom: 15px;">Experience</div>
+        </div>
+        <div id="reference" style="margin-top: 40px">
+            <div style="font-size: 20px; border-bottom: 1px solid #323b4e; padding-bottom: 15px;">Reference</div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function handleEducation(){
+        let maxSchoolIndex = 0;
+        for (const key in result) {
+            if (key.startsWith('school.')) {
+                const index = parseInt(key.split('.')[1], 10);
+                if (index > maxSchoolIndex) {
+                    maxSchoolIndex = index;
+                }
+            }
+        }
+
+        console.log(`Maximum School Index: ${maxSchoolIndex}`);
+
+        // Now you can loop through the "school" properties based on the maximum index
+        for (let i = 1; i <= maxSchoolIndex; i++) {
+            const schoolKey = `school.${i}`;
+            const degreeKey = `degree.${i}`;
+            const startYearKey = `year_start.${i}`;
+            const endYearKey = `year_end.${i}`;
+            const descriptionKey = `education_description.${i}`;
+            console.log(schoolKey, result[schoolKey])
+            if (result[schoolKey]) {
+            $("#education").append(`
+                <div style="margin-top: 30px;font-size: 12px; font-weight: 100">${result[endYearKey]}</div>
+                <div style="margin-top:5px;font-size: 15px; font-weight: bold">${result[schoolKey]}</div>
+                <div style="margin-top:5px;font-size: 12px; font-weight: 100">${result[degreeKey]}</div>
+            `)
+            }
+        }
+    }
+
+    function handleSkill(){
+        let maxSchoolIndex = 0;
+        for (const key in result) {
+            if (key.startsWith('skill-entry.')) {
+                const index = parseInt(key.split('.')[1], 10);
+                if (index > maxSchoolIndex) {
+                    maxSchoolIndex = index;
+                }
+            }
+        }
+
+        console.log(`Maximum Skill Index: ${maxSchoolIndex}`);
+
+        // Now you can loop through the "school" properties based on the maximum index
+        for (let i = 1; i <= maxSchoolIndex; i++) {
+            const schoolKey = `skill-entry.${i}`;
+            console.log(schoolKey, result[schoolKey])
+            if (result[schoolKey]) {
+            $("#skill").append(`
+                <li style="margin-top:20px; font-size: 12px; font-weight: 100">${result[schoolKey]}</li>
+            `)
+            }
+        }
+    }
+    
+    function handleLanguage(){
+        let maxSchoolIndex = 0;
+        for (const key in result) {
+            if (key.startsWith('language.')) {
+                const index = parseInt(key.split('.')[1], 10);
+                if (index > maxSchoolIndex) {
+                    maxSchoolIndex = index;
+                }
+            }
+        }
+
+        console.log(`Maximum Skill Index: ${maxSchoolIndex}`);
+
+        // Now you can loop through the "school" properties based on the maximum index
+        for (let i = 1; i <= maxSchoolIndex; i++) {
+            const schoolKey = `language.${i}`;
+            console.log(schoolKey, result[schoolKey])
+            if (result[schoolKey]) {
+            $("#language").append(`
+                <div style="font-size: 15px; font-weight: bold; margin-top:5px">${result[schoolKey]}</div>
+            `)
+            }
+        }
+    }
+
+    function handleCompany(){
+        let maxSchoolIndex = 0;
+        for (const key in result) {
+            if (key.startsWith('company.')) {
+                const index = parseInt(key.split('.')[1], 10);
+                if (index > maxSchoolIndex) {
+                    maxSchoolIndex = index;
+                }
+            }
+        }
+
+        console.log(`Maximum Skill Index: ${maxSchoolIndex}`);
+
+        // Now you can loop through the "school" properties based on the maximum index
+        for (let i = 1; i <= maxSchoolIndex; i++) {
+            const schoolKey = `company.${i}`;
+            const jobKey = `job.${i}`;
+            const yearStartKey = `year_start.${i}`;
+            const yearEndKey = `year_end.${i}`;
+            console.log(schoolKey, result[schoolKey])
+            if (result[schoolKey]) {
+            $("#experience").append(`
+               <div style="color: #717a8e">
+                    <div style="margin-top: 30px;font-size: 12px; font-weight: bold">${result[yearStartKey]} - ${result[yearEndKey]}</div>
+                    <div style="font-size: 15px; font-weight: 100; margin-top:5px">${result[schoolKey]}</div>
+                    <div style="font-size: 15px; font-weight: bold; margin-top:5px;">${result[jobKey]}</div>
+                    <div style="font-size: 12px; font-weight: 100; margin-top:5px;">${result[jobKey]}</div>
+                </div>
+            `)
+            }
+        }
+    }
+
+    function handleReference(){
+        let maxSchoolIndex = 0;
+        for (const key in result) {
+            if (key.startsWith('ref_name.')) {
+                const index = parseInt(key.split('.')[1], 10);
+                if (index > maxSchoolIndex) {
+                    maxSchoolIndex = index;
+                }
+            }
+        }
+
+        console.log(`Maximum Skill Index: ${maxSchoolIndex}`);
+
+        // Now you can loop through the "school" properties based on the maximum index
+        for (let i = 1; i <= maxSchoolIndex; i++) {
+            const schoolKey = `ref_name.${i}`;
+            const refTitle = `ref_title.${i}`;
+            const refDescription = `ref_description.${i}`;
+            console.log(schoolKey, result[schoolKey])
+            if (result[schoolKey]) {
+            $("#reference").append(`
+               <div >
+                    <div style="margin-top: 30px;font-size: 15px; font-weight: bold">${result[schoolKey]}</div>
+                    <div style="margin-top: 5px;font-size: 12px; font-weight: 100">${result[refTitle]}, ${result[refDescription]}</div>
+                </div>
+            `)
+            }
+        }
+    }
+
+    // let result = localStorage.getItem("formData");
+    // result = JSON.parse(result)
+
+    let result = {
+            photo: "data:image/jpeg;base64,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",
+            "fullName": "Ali",
+            "address": "city, street, country, state",
+            "phone": "0111234567",
+            "email": "ali@gmail.com",
+            "driversLicense": "Yes",
+            "company.1": "Company AAA",
+            "company.2": "Company BBB",
+            "year_start.1": "2023-11-02",
+            "year_start.2": "2023-11-02",
+            "year_start.3": "2023-11-02",
+            "year_start.4": "2023-11-02",
+            "year_end.1": "2023-11-25",
+            "year_end.2": "2023-11-25",
+            "year_end.3": "2023-11-30",
+            "year_end.4": "2023-11-17",
+            "job.1": "working as a software engineer",
+            "job.2": "working as a software engineerrrrr",
+            "skill-entry.1": "JavaScript",
+            "skill-entry.2": "HTML/CSS",
+            "skillDropdown": "HTML/CSS",
+            "language.1": "English",
+            "language.2": "French",
+            "proficiency.1": "Intermediate",
+            "proficiency.2": "Intermediate",
+            "selectedLanguage": "French",
+            "selectedProficiency": "Intermediate",
+            "school.1": "College AAA",
+            "school.2": "College BBB",
+            "degree.1": "Degree in Software Engineer",
+            "degree.2": "Master in Software Engineer",
+            "education_description.1": "- Degree in Software Engineer",
+            "education_description.2": "- Master in Software Engineer",
+            "ref_name.1": "Ali",
+            "ref_name.2": "Muthu",
+            "ref_title.1": "Manager",
+            "ref_title.2": "Manager",
+            "ref_description.1": "Manager in Company AAA",
+            "ref_description.2": "Manager in Company BBB"
+        }
+    console.log("data from output", result);
+    // vdocument.getElementById("output").innerHTML += JSON.stringify(result)
+    document.getElementById("uploaded-image").src = result.photo;
+
+    document.getElementById("email_value").innerText = result.email
+    document.getElementById("phone_value").innerText = result.phone
+    document.getElementById("full_name_value").innerText = result.fullName
+    document.getElementById("address_value").innerText = result.address
+
+    handleEducation()
+    handleSkill()
+    handleLanguage()
+    handleCompany()
+    handleReference()
+   
+    // Function to display resume data
+        function displayResumeData() {
+            const createFormData = JSON.parse(localStorage.getItem('resumeFormData'));
+
+            if (createFormData) {
+                // Clear existing content
+                const socialMediaList = document.getElementById("socialMediaList");
+                socialMediaList.innerHTML = "";
+				
+           // Display the data in HTML
+                document.getElementById("fullName").textContent = createFormData.name;
+                document.getElementById("uploaded-image").src = createFormData.photo;
+                document.querySelector(".contact-title").textContent = "Contact";
+                document.querySelector(".contact-line").style.display = "block";
+                document.getElementById("phone-number").textContent = "Phone Number: " + createFormData.phone;
+                document.getElementById("email").textContent = "Email: " + createFormData.email;
+                document.getElementById("outputAddress").textContent = "Address: " + createFormData.address;
+
+           // Display social media entries
+                const socialMedia = createFormData.socialMedia;
+                if (socialMedia && socialMedia.length > 0) {
+                    socialMedia.forEach((platform, index) => {
+                        const p = document.createElement("p");
+                        p.textContent = `Social Media ${index + 1}: ${platform}`;
+                        socialMediaList.appendChild(p);
+                    });
+                }
+
+                document.querySelector(".current-role").textContent = createFormData.currentStatus;
+                document.querySelector(".self-description").textContent = createFormData.selfDescription;
+
+            // Display education entries
+                const educationList = document.getElementById("educationList");
+                const education = createFormData.education;
+                if (education && education.length > 0) {
+                    education.forEach((edu, index) => {
+                        const educationEntry = document.createElement("div");
+                        educationEntry.classList.add("education-entry");
+
+                        const educationInfo = document.createElement("p");
+                        educationInfo.classList.add("education-info");
+                        educationInfo.textContent = `${edu.date} - ${edu.level} - ${edu.school}`;
+                        educationEntry.appendChild(educationInfo);
+
+                        educationList.appendChild(educationEntry);
+                    });
+                }
+
+            // Display skills entries
+                const skillsList = document.getElementById("skillsList");
+                const skills = createFormData.skills;
+                if (skills && skills.length > 0) {
+                    skills.forEach((skill, index) => {
+                        const p = document.createElement("p");
+                        p.classList.add("skill-language");
+                        p.textContent = `Skill ${index + 1}: ${skill}`;
+                        skillsList.appendChild(p);
+                    });
+                }
+
+            // Display languages entries
+                const languagesList = document.getElementById("languagesList");
+                const languages = createFormData.languages;
+                if (languages && languages.length > 0) {
+                    languages.forEach((language, index) => {
+                        const p = document.createElement("p");
+                        p.classList.add("skill-language");
+                        p.textContent = `Language ${index + 1}: ${language}`;
+                        languagesList.appendChild(p);
+                    });
+                }
+
+            // Display experience entries
+                const experienceList = document.getElementById("experienceList");
+                const experience = createFormData.experience;
+                if (experience && experience.length > 0) {
+                    experience.forEach((exp, index) => {
+                        const experienceEntry = document.createElement("div");
+                        experienceEntry.classList.add("experience-entry");
+
+                        const experienceText = document.createElement("p");
+                        experienceText.classList.add("experience-text");
+                        experienceText.textContent = `${exp.dateRange} - ${exp.company} | ${exp.position} | ${exp.description}`;
+                        experienceEntry.appendChild(experienceText);
+
+                        experienceList.appendChild(experienceEntry);
+                    });
+                }
+            }
+        }
+
+    // Call the function when the page loads
+    document.addEventListener('DOMContentLoaded', displayResumeData);
+
+    // document.getElementById("uploaded-image").src = JSON.parse(result).photo;
+</script>
+
+</body>
+
+</html>

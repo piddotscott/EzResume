@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Cover Letter Editor</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add custom styles here */
+        body {
+            background-color: #f2f2f2; /* Background color */
+            font-family: 'Arial', sans-serif; /* Default font */
+        }
+
+        .container {
+            background-color: #ffffff; /* Container background color */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            width: 70%;
+        }
+
+        h2 {
+            color: #333; /* Heading color */
+        }
+
+        p {
+            color: #555; /* Paragraph color */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #ff5722;
+            border-color: #ff5722;
+            font-size: 16px;
+            padding: 10px 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff7f50;
+            border-color: #ff7f50;
+        }
+
+        .cover-letter-textarea {
+            width: 100%;
+            min-height: 300px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 14px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cover Letter Editor Content -->
+    <div class="container">
+        <h2>Cover Letter Editor</h2>
+        <p>Edit your cover letter below (fill in your personal details):</p>
+
+        <!-- Cover letter editing form -->
+        <form>
+            <div class="form-group">
+                <label for="coverLetter">Cover Letter:</label>
+                <textarea class="form-control cover-letter-textarea" id="coverLetter" rows="10">[Your Name]
+[Your Address]
+
+[City, State ZIP Code]
+
+[Your Email Address]
+
+[Your Phone Number]
+
+[Date]
+
+
+[Employer's Name]
+                
+[Company Name]
+                    
+[Company Address]
+                   
+[City, State ZIP Code]
+
+
+Dear [Employer's Name],
+
+
+            I am writing to express my strong interest in the [Name of the Internship Program] at [Company Name], as advertised on [Where You Found the Job Posting]. As a [Your Major/Field of Study] student at [Your University], I am enthusiastic about the opportunity to apply my skills and passion for [Relevant Skills/Field] within your organization.
+
+            During my academic journey, I have developed a strong foundation in [Relevant Skills/Field] and have honed my abilities through coursework, projects, and extracurricular activities. I am particularly drawn to [Company Name] because of its reputation for innovation, dedication to excellence, and commitment to fostering professional growth in its interns.
+
+            My academic accomplishments, combined with my determination and drive, have prepared me to contribute meaningfully to [Company Name]. I am particularly excited about the prospect of working with your dynamic team to [Mention a Relevant Project, Goal, or Initiative] and learning from the accomplished professionals at [Company Name]. I am confident that this internship will provide an invaluable opportunity for me to apply my knowledge and acquire new skills in a real-world setting.
+
+            In addition to my academic background, I possess excellent communication, teamwork, and problem-solving abilities, which I believe will be assets in the fast-paced environment at [Company Name]. My adaptability and eagerness to learn will enable me to quickly integrate into your team and make a positive impact.
+
+            Enclosed is my resume, which provides further details about my educational background, work experience, and relevant skills. I would welcome the chance to discuss how my qualifications align with the needs of [Company Name] in greater detail.
+
+            Thank you for considering my application. I am excited about the opportunity to contribute to the success of [Company Name] and to learn from your experienced professionals. I look forward to the possibility of discussing my application further in an interview.
+
+            Sincerely,
+
+            [Your Full Name]
+                </textarea>
+            </div>
+           <p style="font-size: 14px; text-align: left;">
+    <strong>Remember to customize this cover letter with your specific information, including your name, contact details, the name of the company, and any other details that are relevant to your application. Tailoring the letter to the specific internship and company is essential to make a strong impression.</strong>
+    <br><br>
+    <input type="checkbox" id="acceptCheckbox">
+    <label for="acceptCheckbox">I certify that the information above is accurate and truthful.</label>
+</p>
+
+            <!-- Print the cover letter button -->
+            <button type="button" class="btn btn-primary" id="printCoverLetter">Print Cover Letter</button>
+        </form>
+    </div>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // JavaScript for handling cover letter printing
+    document.getElementById('printCoverLetter').addEventListener('click', function () {
+        if (!document.getElementById('acceptCheckbox').checked) {
+            alert('Please certify that the information is accurate and truthful.');
+        } else {
+            if (confirm('Have you checked and inserted all your credentials?\n\nClick "OK" to proceed to printing or "Cancel" to check again.')) {
+                var printWindow = window.open('', '', 'width=600,height=600');
+                printWindow.document.open();
+                printWindow.document.write('<html><head><title>Cover Letter</title></head><body>');
+                printWindow.document.write('<pre>' + document.getElementById('coverLetter').value + '</pre>');
+                printWindow.document.write('</body></html>');
+                printWindow.document.close();
+                printWindow.print();
+                printWindow.close();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
+
+
